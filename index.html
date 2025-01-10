@@ -7,25 +7,34 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <div class="12c5"><img src="img/12c5.png" alt="" class="icon"></div>
     <div class="arrow">
-        <img src="muiten.png" alt="Arrow">
+        <img src="img/muiten.png">
     </div>    
     <div class="wapper" id="wheel">
         <div class="one">Há <br> cảo</div>
         <div class="two">Kim <br> bắp</div>
         <div class="three">Xúc <br> xích <br> Đức</div>
         <div class="four">Bánh <br> su kem</div>
-        <div class="five">Bánh flam</div>
-        <div class="six">Bim bim</div>
-        <div class="seven">Nước ngọt</div>
+        <div class="five">Bánh <br> flam</div>
+        <div class="six">Bim <br> bim</div>
+        <div class="seven">Nước <br> ngọt</div>
         <div class="eight">Rau câu <br> dừa</div>
         <div class="night">Babythree <br> mini</div>
+        <div class="ten">Babythree <br> big</div>
     </div>
-    <div class="arrow">
-        <img src="https://img.icons8.com/ios-filled/50/000000/upward-arrow.png" alt="Arrow">
+    <!-- Modal chứa kết quả vòng quay -->
+    <div id="result-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close-btn">&times;</span>
+            <img id="product-image" src="" alt="Sản phẩm" class="product-image" />
+            <p id="product-name" class="product-name"></p>
+            <button id="ok-btn" class="ok-btn">OK</button> <!-- Nút OK thêm vào -->
+        </div>
     </div>
-    <button id="spin">Quay</button>
 
+
+    <button id="spin">Quay</button>
     <script src="js/script.js"></script>
 </body>
 </html>

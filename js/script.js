@@ -2,20 +2,21 @@ const wheel = document.getElementById('wheel');
 const spinButton = document.getElementById('spin');
 let currentRotation = 0; // Góc hiện tại ban đầu bằng 0
 
-// Danh sách sản phẩm
+// Danh sách sản phẩm và hình ảnh tương ứng
 const products = [
-    "Há cảo",
-    "Kim bắp",
-    "Xúc xích Đức",
-    "Bánh su kem",
-    "Bánh flam",
-    "Bim bim",
-    "Nước ngọt",
-    "Rau câu dừa",
-    "Babythree"
+    { name: "Há cảo", image: "img/hacao.png" },
+    { name: "Kim bắp", image: "img/kimbap.png" },
+    { name: "Xúc xích Đức", image: "img/xucxichduc.png" },
+    { name: "Bánh su kem", image: "img/banhxukem.png" },
+    { name: "Bánh flam", image: "img/banhflan.png" },
+    { name: "Bim bim", image: "img/bimbim.png" },
+    { name: "Nước ngọt", image: "img/nuocngot.png" },
+    { name: "Rau câu dừa", image: "img/raucaudua.png" },
+    { name: "Babythree mini", image: "img/babythreemini.png" },
+    { name: "Babythree big", image: "img/babythreegbig.png" }
 ];
 
-let nextResult = randomizeProduct(); // Kết quả vòng tiếp theo
+let nextResult = randomizeProduct(); // Kết quả vòng quay tiếp theo
 
 // Hàm random sản phẩm
 function randomizeProduct() {
@@ -46,14 +47,31 @@ function spinWheel() {
     wheel.style.transition = "transform 5s ease-out";
     wheel.style.transform = `rotate(-${currentRotation}deg)`; // Quay ngược chiều kim đồng hồ
 
-    // Ghi log kết quả
-    console.log(`Kết quả vòng này: ${currentProduct}`);
-    console.log(`Kết quả vòng tiếp theo: ${nextProduct}`);
-
-    // Hiển thị kết quả sau khi dừng
     setTimeout(() => {
-        alert(`Bạn đã trúng: ${currentProduct}`);
-    }, 5000);
+        // Hiển thị modal
+        const modal = document.getElementById('result-modal');
+        const productImage = document.getElementById('product-image');
+        const productName = document.getElementById('product-name');
+
+        // Cập nhật nội dung modal
+        productImage.src = currentProduct.image;
+        productName.textContent = currentProduct.name;
+
+        // Hiển thị modal
+        modal.style.display = "flex";
+
+        // Đóng modal khi nhấn vào nút OK
+        const okBtn = document.getElementById('ok-btn');
+        okBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Đóng modal khi nhấn vào nút đóng
+        const closeModal = document.getElementById('close-modal');
+        closeModal.onclick = function() {
+            modal.style.display = "none";
+        }
+    }, 5000); // Chờ 5 giây sau khi quay xong
 }
 
 // Thêm sự kiện khi nhấn nút quay

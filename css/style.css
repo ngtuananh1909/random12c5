@@ -1,23 +1,27 @@
-body{
+body {
     margin: 0px;
     padding: 0px;
-    background-color: aqua;
+    background-image: url('https://www.didongmy.com/vnt_upload/news/03_2024/hinh-nen-4k-la-gi-Didongmy.jpg'); /* Đường dẫn hình nền trực tuyến */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
     overflow: hidden;
 }
+
+
 *{
     box-sizing: border-box;
-
 }
 .wapper{
     width: 500px;
     height: 500px;
     background-color: white;
     border-radius: 50%;
-    border: 15px solid rgb(37, 219, 165);
+    border: 15px solid rgb(216, 219, 37);
     position: relative;
     overflow: hidden;
     transition: 5s;
@@ -38,67 +42,79 @@ body{
     font-family: sans-serif;
     color: black;
     left: 135px;
-    padding: 5px; /* Thêm khoảng cách bên trong để đẹp hơn */
-    line-height: 1.2; /* Tăng khoảng cách giữa các dòng */
-    word-wrap: break-word; /* Bật chế độ tự ngắt dòng */
-    text-align: center;
 }
 
 .wapper .one {
-    background-color: blue;
+    background-color: rgb(255, 196, 0);
     transform: rotate(0deg);
 }
 
 .wapper .two {
-    background-color: aqua;
-    transform: rotate(40deg);
+    background-color: rgb(51, 255, 0);
+    transform: rotate(36deg);
 }
 
 .wapper .three {
-    background-color: rgb(255, 81, 0);
-    transform: rotate(80deg);
+    background-color: rgb(179, 255, 0);
+    transform: rotate(72deg);
 }
 
 .wapper .four {
-    background-color: rgb(0, 81, 255);
-    transform: rotate(120deg);
+    background-color: rgb(0, 247, 255);
+    transform: rotate(108deg);
 }
 
 .wapper .five {
-    background-color: rgb(212, 0, 255);
-    transform: rotate(160deg);
+    background-color: rgb(183, 0, 255);
+    transform: rotate(144deg);
 }
 
 .wapper .six {
-    background-color: rgb(255, 251, 0);
-    transform: rotate(200deg);
+    background-color: rgb(9, 255, 0);
+    transform: rotate(180deg);
 }
 
 .wapper .seven {
-    background-color: rgb(43, 255, 0);
-    transform: rotate(240deg);
+    background-color: rgb(255, 81, 0);
+    transform: rotate(216deg);
 }
 
 .wapper .eight {
-    background-color: rgb(0, 110, 255);
-    transform: rotate(280deg);
+    background-color: rgb(0, 102, 255);
+    transform: rotate(252deg);
 }
 
 .wapper .night {
-    background-color: rgb(123, 255, 0);
-    transform: rotate(320deg);
+    background-color: rgb(0, 255, 106);
+    transform: rotate(288deg);
 }
 
+.wapper .ten {
+    background-color: rgb(51, 255, 0);
+    transform: rotate(324deg);
+}
 
 .arrow {
     position: absolute;
-    top: 122px; /* Định vị mũi tên ở trên cùng */
+    top: 154px; /* Định vị mũi tên ở trên cùng */
     left: 50%;
     transform: translateX(-50%);
     z-index: 10; /* Hiển thị mũi tên trên cùng */
 }
 
 .arrow img {
+    width: 90px; /* Kích thước mũi tên */
+    height: auto;
+}
+.icon {
+    position: absolute;
+    top: -57px; /* Định vị mũi tên ở trên cùng */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10; /* Hiển thị mũi tên trên cùng */
+}
+
+.icon img {
     width: 90px; /* Kích thước mũi tên */
     height: auto;
 }
@@ -127,3 +143,66 @@ body{
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Thêm hiệu ứng đổ bóng */
 }
 
+/* Modal cơ bản */
+.modal {
+    display: none; /* Ẩn modal khi chưa có kết quả */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Màu nền bán trong suốt */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Nội dung của modal */
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 80%;
+}
+
+/* Ảnh sản phẩm */
+.product-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+/* Tên sản phẩm */
+.product-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Nút đóng modal */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    cursor: pointer;
+}
+/* Nút OK trong modal */
+.ok-btn {
+    background-color: #4CAF50; /* Màu nền nút */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+/* Nút OK khi hover */
+.ok-btn:hover {
+    background-color: #45a049;
+}
