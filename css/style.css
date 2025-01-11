@@ -1,7 +1,7 @@
 body {
     margin: 0px;
     padding: 0px;
-    background-image: url('https://www.didongmy.com/vnt_upload/news/03_2024/hinh-nen-4k-la-gi-Didongmy.jpg'); /* Đường dẫn hình nền trực tuyến */
+    background-image: url('https://i.pinimg.com/736x/76/a8/ea/76a8ea33d8fbc7ed64732b66528b027b.jpg'); /* Đường dẫn hình nền trực tuyến */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -169,8 +169,8 @@ body {
 
 /* Ảnh sản phẩm */
 .product-image {
-    width: 100px;
-    height: 100px;
+    width: auto;
+    height: 200px;
     object-fit: cover;
     margin-bottom: 20px;
 }

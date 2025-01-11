@@ -2,30 +2,37 @@ const wheel = document.getElementById('wheel');
 const spinButton = document.getElementById('spin');
 let currentRotation = 0; // Góc hiện tại ban đầu bằng 0
 
-// Danh sách sản phẩm và hình ảnh tương ứng
+// Danh sách sản phẩm và tỷ lệ (tổng tỷ lệ phải bằng 100%)
 const products = [
-    { name: "Há cảo", image: "img/hacao.png" },
-    { name: "Kim bắp", image: "img/kimbap.png" },
-    { name: "Xúc xích Đức", image: "img/xucxichduc.png" },
-    { name: "Bánh su kem", image: "img/banhxukem.png" },
-    { name: "Bánh flam", image: "img/banhflan.png" },
-    { name: "Bim bim", image: "img/bimbim.png" },
-    { name: "Nước ngọt", image: "img/nuocngot.png" },
-    { name: "Rau câu dừa", image: "img/raucaudua.png" },
-    { name: "Babythree mini", image: "img/babythreemini.png" },
-    { name: "Babythree big", image: "img/babythreegbig.png" }
+    { name: "Há cảo", image: "img/hacao.png", percent: 10 },
+    { name: "Kim bắp", image: "img/kimbap.png", percent: 15 },
+    { name: "Xúc xích Đức", image: "img/xucxichduc.png", percent: 5 },
+    { name: "Bánh su kem", image: "img/banhxukem.png", percent: 20 },
+    { name: "Bánh flam", image: "img/banhflan.png", percent: 10 },
+    { name: "Bim bim", image: "img/bimbim.png", percent: 10 },
+    { name: "Nước ngọt", image: "img/nuocngot.png", percent: 10 },
+    { name: "Rau câu dừa", image: "img/raucaudua.png", percent: 10 },
+    { name: "Babythree mini", image: "img/babythreemini.png", percent: 5 },
+    { name: "Babythree big", image: "img/babythreegbig.png", percent: 5 },
 ];
 
-let nextResult = randomizeProduct(); // Kết quả vòng quay tiếp theo
-
-// Hàm random sản phẩm
+// Hàm random sản phẩm theo tỷ lệ
 function randomizeProduct() {
-    return Math.floor(Math.random() * products.length);
+    const randomValue = Math.random() * 100; // Giá trị ngẫu nhiên từ 0 đến 100
+    let cumulativePercent = 0;
+
+    for (let i = 0; i < products.length; i++) {
+        cumulativePercent += products[i].percent;
+        if (randomValue <= cumulativePercent) {
+            return i; // Trả về chỉ mục của sản phẩm được chọn
+        }
+    }
+    return 0; // Dự phòng nếu không trùng
 }
 
 // Hàm để quay vòng
 function spinWheel() {
-    const currentIndex = nextResult; // Lấy kết quả vòng hiện tại
+    const currentIndex = randomizeProduct(); // Lấy kết quả vòng hiện tại
     const currentProduct = products[currentIndex];
 
     // Tính góc mới
@@ -39,16 +46,16 @@ function spinWheel() {
     // Cập nhật góc hiện tại
     currentRotation += totalRotation;
 
-    // Random cho vòng quay tiếp theo
-    nextResult = randomizeProduct(); // Lưu kết quả vòng tiếp theo
-    const nextProduct = products[nextResult];
-
     // Áp dụng rotation
     wheel.style.transition = "transform 5s ease-out";
     wheel.style.transform = `rotate(-${currentRotation}deg)`; // Quay ngược chiều kim đồng hồ
 
+    // Ghi log kết quả
+    console.log(`Kết quả vòng này: ${currentProduct.name}`);
+
+    // Hiển thị kết quả sau khi dừng
     setTimeout(() => {
-        // Hiển thị modal
+        // Hiển thị modal kết quả
         const modal = document.getElementById('result-modal');
         const productImage = document.getElementById('product-image');
         const productName = document.getElementById('product-name');
