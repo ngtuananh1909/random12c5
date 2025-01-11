@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
         displayNextProduct(); // Hiển thị sản phẩm tiếp theo trong console
 
         const targetRotation = (360 / products.length) * currentIndex;
-        const fullRotation = 360 * 5;
+        const fullRotation = 360 * 10;
         const rotationDelta = targetRotation - (currentRotation % 360);
         const totalRotation = fullRotation + rotationDelta;
 
