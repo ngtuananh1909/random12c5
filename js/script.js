@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const products = [
         { name: "Há cảo", image: "img/hacao.png", percent: 12.5 },
-        { name: "Kim bắp", image: "img/kimbap.png", percent: 12.5 },
+        { name: "Khoai tây chiên", image: "https://texaschickenvn.com/vnt_upload/product/07_2023/Khoai_tay_chien_co_lon.png", percent: 12.5 },
         { name: "Xúc xích Đức", image: "img/xucxichduc.png", percent: 12.5 },
         { name: "Bánh su kem", image: "img/banhxukem.png", percent: 12.5 },
         { name: "Bánh flam", image: "img/banhflan.png", percent: 8.33 },
@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const spinButton = document.getElementById('spin');
     let currentRotation = 0;
 
-    // Hàm random sản phẩm theo tỷ lệ
     function randomizeProduct() {
         const randomValue = Math.random() * 100;
         let cumulativePercent = 0;
@@ -32,10 +31,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let nextResult = randomizeProduct();
 
-    // Hiển thị sản phẩm tiếp theo trong console
     function displayNextProduct() {
         const nextProduct = products[nextResult];
-        console.log(`Sản phẩm tiếp theo: ${nextProduct.name}`);
+        console.log(`${nextProduct.name}`);
     }
 
     function spinWheel() {
@@ -43,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const currentProduct = products[currentIndex];
 
         nextResult = randomizeProduct();
-        displayNextProduct(); // Hiển thị sản phẩm tiếp theo trong console
+        displayNextProduct();
 
         const targetRotation = (360 / products.length) * currentIndex;
         const fullRotation = 360 * 10;
@@ -78,5 +76,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     spinButton.addEventListener('click', spinWheel);
-    displayNextProduct(); // Hiển thị sản phẩm tiếp theo lần đầu
+
+    // Lắng nghe phím bấm
+    document.addEventListener('keydown', function (event) {
+        if (event.key.toLowerCase() === 'g') { // Kiểm tra nếu phím bấm là "G" (không phân biệt hoa/thường)
+            nextResult = randomizeProduct();
+            displayNextProduct(); // Hiển thị sản phẩm tiếp theo trong console
+        }
+    });
+
+    displayNextProduct();
 });
