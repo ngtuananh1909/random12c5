@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: black; /* Nền tối để nổi bật pháo bông */
+}
+
+/* Tia pháo bông */
+.particle {
+    position: absolute;
+    width: 10px; /* Tăng kích thước tia */
+    height: 10px; /* Tăng kích thước tia */
+    border-radius: 50%; /* Bo tròn để thành hình tròn */
+    background-color: white;
+    opacity: 1;
+    pointer-events: none;
+    animation: moveParticle 0.8s ease-out, fadeOut 0.8s ease-in; /* Nhanh hơn */
+}
+
+/* Animation di chuyển */
+@keyframes moveParticle {
+    to {
+        transform: translate(var(--move-x), var(--move-y));
+    }
+}
+
+/* Animation mờ dần */
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}

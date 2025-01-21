@@ -2,21 +2,21 @@ document.addEventListener('DOMContentLoaded', function () {
     const products = [
         { name: "Há cảo", image: "img/hacao.png", percent: 12.5 },
         { name: "Khoai tây chiên", image: "https://texaschickenvn.com/vnt_upload/product/07_2023/Khoai_tay_chien_co_lon.png", percent: 12.5 },
-        { name: "Xúc xích Đức", image: "img/xucxichduc.png", percent: 12.5 },
-        { name: "Bánh su kem", image: "img/banhxukem.png", percent: 12.5 },
-        { name: "Bánh flam", image: "img/banhflan.png", percent: 8.33 },
-        { name: "Bim bim", image: "img/bimbim.png", percent: 16.67 },
-        { name: "Nước ngọt", image: "img/nuocngot.png", percent: 16.67 },
-        { name: "Rau câu dừa", image: "img/raucaudua.png", percent: 4.17 },
-        { name: "Babythree mini", image: "img/babythreemini.png", percent: 3.75 },
-        { name: "Babythree big", image: "img/babythreegbig.png", percent: 0.42 },
+        { name: "Xúc xích Đức", image: "img/xucxichduc.png", percent: 12.6 },
+        { name: "Bánh su kem", image: "img/banhxukem.png", percent: 12.6 },
+        { name: "Bánh flan", image: "img/banhflan.png", percent: 8.43 },
+        { name: "Bim bim", image: "img/bimbim.png", percent: 16.8 },
+        { name: "Nước ngọt", image: "img/nuocngot.png", percent: 16.9 },
+        { name: "Rau câu dừa", image: "img/raucaudua.png", percent: 0 },
+        { name: "Babythree mini", image: "img/babythreemini.png", percent: 3 },
+        { name: "Babythree big", image: "img/babythreegbig.png", percent: 0.4 },
     ];
 
     const wheel = document.getElementById('wheel');
     const spinButton = document.getElementById('spin');
     let currentRotation = 0;
-    let isSpinning = false; // Trạng thái vòng quay
-    let previousResult = -1; // Lưu kết quả trước đó
+    let isSpinning = false;
+    let previousResult = -1;
     let nextResult = randomizeProduct();
 
     function randomizeProduct() {
@@ -32,7 +32,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     break;
                 }
             }
-        } while (randomIndex === previousResult); // Đảm bảo sản phẩm mới khác sản phẩm trước
+        } while (randomIndex === previousResult && previousResult != -1);
+        previousResult = randomIndex;
         return randomIndex;
     }
 
@@ -42,14 +43,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function spinWheel() {
-        if (isSpinning) return; // Ngăn chặn bấm khi vòng quay đang quay
+        if (isSpinning) return;
         isSpinning = true;
 
         const currentIndex = nextResult;
         const currentProduct = products[currentIndex];
 
-        nextResult = randomizeProduct(); // Lấy kết quả mới
-        displayNextProduct(); // Hiển thị sản phẩm mới trong console
+        nextResult = randomizeProduct();
+        displayNextProduct();
 
         const targetRotation = (360 / products.length) * currentIndex;
         const fullRotation = 360 * 10;
@@ -81,8 +82,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 modal.style.display = "none";
             };
 
-            isSpinning = false; // Cho phép bấm lại sau khi kết thúc
-            previousResult = currentIndex; // Cập nhật sản phẩm trước
+            isSpinning = false;
+            previousResult = currentIndex;
         }, 5000);
     }
 
