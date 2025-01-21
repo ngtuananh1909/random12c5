@@ -7,13 +7,15 @@ document.addEventListener('DOMContentLoaded', function () {
         { name: "Bánh flan", image: "img/banhflan.png", percent: 8.43 },
         { name: "Bim bim", image: "img/bimbim.png", percent: 16.8 },
         { name: "Nước ngọt", image: "img/nuocngot.png", percent: 16.9 },
-        { name: "Rau câu dừa", image: "img/raucaudua.png", percent: 0 },
-        { name: "Babythree mini", image: "img/babythreemini.png", percent: 3 },
-        { name: "Babythree big", image: "img/babythreegbig.png", percent: 0.4 },
+        { name: "Vong tay", image: "https://laimut.com/wp-content/uploads/Vong-Tay-Swarovski-Chinh-Hang-Tennis-Deluxe-bracelet-01.jpg", percent: 2.08 },
+        { name: "Babythree mini", image: "img/babythreemini.png", percent: 3.4 },
+        { name: "Babythree big", image: "img/babythreegbig.png", percent: 0 },
     ];
 
     const wheel = document.getElementById('wheel');
     const spinButton = document.getElementById('spin');
+    const nextProductDisplay = document.getElementById('next-product-display');
+    const nextProductText = document.getElementById('next-product-text');
     let currentRotation = 0;
     let isSpinning = false;
     let previousResult = -1;
@@ -24,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
         do {
             const randomValue = Math.random() * 100;
             let cumulativePercent = 0;
-
+    
             for (let i = 0; i < products.length; i++) {
                 cumulativePercent += products[i].percent;
                 if (randomValue <= cumulativePercent) {
@@ -32,14 +34,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     break;
                 }
             }
-        } while (randomIndex === previousResult && previousResult != -1);
+        } while (randomIndex === previousResult || products[randomIndex].percent === 0);
         previousResult = randomIndex;
         return randomIndex;
-    }
+    }    
 
     function displayNextProduct() {
         const nextProduct = products[nextResult];
-        console.log(`${nextProduct.name}`);
+        nextProductText.textContent = `Next: ${nextProduct.name}`;
     }
 
     function spinWheel() {
@@ -95,6 +97,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 nextResult = randomizeProduct();
                 displayNextProduct();
             }
+        } else if (event.key.toLowerCase() === 's') {
+            nextProductDisplay.style.display = 'block'; // Hiển thị sản phẩm
+        }
+    });
+
+    document.addEventListener('keyup', function (event) {
+        if (event.key.toLowerCase() === 's') {
+            nextProductDisplay.style.display = 'none'; // Ẩn sản phẩm
         }
     });
 
