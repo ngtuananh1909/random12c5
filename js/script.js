@@ -15,21 +15,26 @@ document.addEventListener('DOMContentLoaded', function () {
     const wheel = document.getElementById('wheel');
     const spinButton = document.getElementById('spin');
     let currentRotation = 0;
+    let isSpinning = false; // Trạng thái vòng quay
+    let previousResult = -1; // Lưu kết quả trước đó
+    let nextResult = randomizeProduct();
 
     function randomizeProduct() {
-        const randomValue = Math.random() * 100;
-        let cumulativePercent = 0;
+        let randomIndex;
+        do {
+            const randomValue = Math.random() * 100;
+            let cumulativePercent = 0;
 
-        for (let i = 0; i < products.length; i++) {
-            cumulativePercent += products[i].percent;
-            if (randomValue <= cumulativePercent) {
-                return i;
+            for (let i = 0; i < products.length; i++) {
+                cumulativePercent += products[i].percent;
+                if (randomValue <= cumulativePercent) {
+                    randomIndex = i;
+                    break;
+                }
             }
-        }
-        return 0;
+        } while (randomIndex === previousResult); // Đảm bảo sản phẩm mới khác sản phẩm trước
+        return randomIndex;
     }
-
-    let nextResult = randomizeProduct();
 
     function displayNextProduct() {
         const nextProduct = products[nextResult];
@@ -37,11 +42,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function spinWheel() {
+        if (isSpinning) return; // Ngăn chặn bấm khi vòng quay đang quay
+        isSpinning = true;
+
         const currentIndex = nextResult;
         const currentProduct = products[currentIndex];
 
-        nextResult = randomizeProduct();
-        displayNextProduct();
+        nextResult = randomizeProduct(); // Lấy kết quả mới
+        displayNextProduct(); // Hiển thị sản phẩm mới trong console
 
         const targetRotation = (360 / products.length) * currentIndex;
         const fullRotation = 360 * 10;
@@ -66,22 +74,26 @@ document.addEventListener('DOMContentLoaded', function () {
             const okBtn = document.getElementById('ok-btn');
             okBtn.onclick = function () {
                 modal.style.display = "none";
-            }
+            };
 
             const closeModal = document.getElementById('close-modal');
             closeModal.onclick = function () {
                 modal.style.display = "none";
-            }
+            };
+
+            isSpinning = false; // Cho phép bấm lại sau khi kết thúc
+            previousResult = currentIndex; // Cập nhật sản phẩm trước
         }, 5000);
     }
 
     spinButton.addEventListener('click', spinWheel);
 
-    // Lắng nghe phím bấm
     document.addEventListener('keydown', function (event) {
-        if (event.key.toLowerCase() === 'g') { // Kiểm tra nếu phím bấm là "G" (không phân biệt hoa/thường)
-            nextResult = randomizeProduct();
-            displayNextProduct(); // Hiển thị sản phẩm tiếp theo trong console
+        if (event.key.toLowerCase() === 'g') { 
+            if (!isSpinning) {
+                nextResult = randomizeProduct();
+                displayNextProduct();
+            }
         }
     });
 
